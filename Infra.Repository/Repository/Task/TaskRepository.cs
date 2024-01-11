@@ -53,7 +53,7 @@ namespace Infra.Repository.Repository.AddTask
         {
             var query = @"SELECT id, nome, descricao, status, 
                                  status, prioridade, datacriacao, 
-                                 dataatualizacao, projetoid 
+                                 dataatualizacao, projetoid, usuarioId 
                           FROM task
                         ";
             using var connection = _dbContext.CreateConnection();
