@@ -39,3 +39,33 @@ CREATE TABLE task (
     FOREIGN KEY (projetoid) REFERENCES project(id),
     FOREIGN KEY (usuarioid) REFERENCES usuario(id) -- Corrige a referência para usuarioid
 );
+
+GO
+DROP TABLE IF EXISTS comentario;
+CREATE TABLE comentario (
+    id INT PRIMARY KEY IDENTITY,
+    texto VARCHAR(500) NOT NULL,
+    datacriacao DATETIME DEFAULT GETDATE() NOT NULL,
+    usuarioid INT,
+    taskid INT,
+    FOREIGN KEY (usuarioid) REFERENCES usuario(id),
+    FOREIGN KEY (taskid) REFERENCES task(id)
+);
+
+go
+
+CREATE TRIGGER trg_AfterInsertComentario
+ON comentario
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @TaskId INT;
+
+    SELECT @TaskId = taskid FROM inserted;
+
+    UPDATE task
+    SET ultimaatualizacao = GETDATE()
+    WHERE id = @TaskId;
+END;

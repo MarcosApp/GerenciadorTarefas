@@ -18,7 +18,7 @@ namespace Infra.Repository.Repository.Reports
 
         public List<Report> ListReport(DateTime data)
         {
-            var query = @"SELECT usuarioid AS id, AVG(tarefas_concluidas) AS Concluidas, nome
+            var query = @"SELECT usuarioid, AVG(tarefas_concluidas) AS Concluidas, nome
                             FROM (
                                 SELECT usuarioid, COUNT(*) AS tarefas_concluidas, u.nome
                                 FROM task t 
@@ -27,6 +27,7 @@ namespace Infra.Repository.Repository.Reports
                                 GROUP BY usuarioid, u.nome
                             ) AS subquery
                             GROUP BY usuarioid, nome;
+
                         ";
             var parameters = new DynamicParameters();
             parameters.Add("Data30DiasAtras", data, System.Data.DbType.DateTime);

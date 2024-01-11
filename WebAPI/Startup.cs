@@ -1,7 +1,9 @@
+using Application.UseCases.AddComment;
 using Application.UseCases.AddProject;
 using Application.UseCases.AddReport;
 using Application.UseCases.AddTask;
 using Application.UseCases.AddUser;
+using Domain.Contracts.Repositories.AddComment;
 using Domain.Contracts.Repositories.AddProject;
 using Domain.Contracts.Repositories.AddReport;
 using Domain.Contracts.Repositories.AddTask;
@@ -10,8 +12,10 @@ using Domain.Contracts.UseCases.AddProject;
 using Domain.Contracts.UseCases.AddReport;
 using Domain.Contracts.UseCases.AddTask;
 using Domain.Contracts.UseCases.AddUser;
+using Domain.Contracts.UseCases.Comentario;
 using FluentValidation;
 using Infra.Repository.DbContext;
+using Infra.Repository.Repository.AddComment;
 using Infra.Repository.Repository.AddProject;
 using Infra.Repository.Repository.AddTask;
 using Infra.Repository.Repository.AddUser;
@@ -45,11 +49,13 @@ namespace WebAPI
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             services.AddScoped<IProjectUseCase, ProjectUseCase>();
             services.AddScoped<ITaskUseCase, TaskUseCase>();
             services.AddScoped<IUserUseCase, UserUseCase>();
             services.AddScoped<IReportUseCase, ReportUseCase>();
+            services.AddScoped<ICommentUseCase, CommentUseCase>();
 
             services.AddTransient<IValidator<AddProjectInput>, AddProjectInputValidator>();
             services.AddTransient<IValidator<AddTaskInput>, AddTaskInputValidator>();
