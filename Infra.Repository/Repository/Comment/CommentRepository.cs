@@ -22,7 +22,7 @@ namespace Infra.Repository.Repository.AddComment
             var parameters = new DynamicParameters();
             parameters.Add("texto", comment.Texto, System.Data.DbType.String);
             parameters.Add("usuarioid", comment.UsuarioId, System.Data.DbType.Int32);
-            parameters.Add("taskid", comment.TaskId, System.Data.DbType.DateTime);
+            parameters.Add("taskid", comment.TaskId, System.Data.DbType.Int32);
 
             using var connection = _dbContext.CreateConnection();
             int insertedId = connection.QuerySingle<int>(query, parameters);

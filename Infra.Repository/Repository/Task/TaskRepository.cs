@@ -53,7 +53,7 @@ namespace Infra.Repository.Repository.AddTask
         {
             var query = @"SELECT id, nome, descricao, status, 
                                  status, prioridade, datacriacao, 
-                                 dataatualizacao, projetoid, usuarioId 
+                                 dataatualizacao, projetoid, usuarioId, ultimaatualizacao
                           FROM task
                         ";
             using var connection = _dbContext.CreateConnection();
@@ -65,7 +65,7 @@ namespace Infra.Repository.Repository.AddTask
         {
             var query = @"SELECT id, nome, descricao, status, 
                                  status, prioridade, datacriacao, 
-                                 dataatualizacao, projetoid 
+                                 dataatualizacao, projetoid, ultimaatualizacao
                           FROM task where id = @id
                         ";
 

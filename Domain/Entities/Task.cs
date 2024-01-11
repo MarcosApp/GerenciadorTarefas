@@ -44,6 +44,7 @@ namespace Domain.Entities
         public DateTime DataCriacao { get; private set; }
 
         public DateTime DataAtualizacao { get; private set; }
+        public DateTime UltimaAtualizacao { get; set; }
 
         public virtual int ProjetoId { get; private set; }
         public virtual int UsuarioId { get; private set; }
