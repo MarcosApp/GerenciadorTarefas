@@ -26,6 +26,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using WebAPI.Models.Comment;
 using WebAPI.Models.Project;
 using WebAPI.Models.Task;
 using WebAPI.Models.User;
@@ -61,6 +62,7 @@ namespace WebAPI
             services.AddTransient<IValidator<AddTaskInput>, AddTaskInputValidator>();
             services.AddTransient<IValidator<UpdateTaskInput>, UpdateTaskInputValidator>();
             services.AddTransient<IValidator<AddUserInput>, AddUserInputValidator>();
+            services.AddTransient<IValidator<AddCommentInput>, AddCommentInputValidator>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

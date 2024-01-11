@@ -1,4 +1,5 @@
-﻿using Domain.Contracts.UseCases.Comentario;
+﻿using Domain.Contracts.UseCases.AddTask;
+using Domain.Contracts.UseCases.Comentario;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models.Comment;
@@ -11,11 +12,13 @@ namespace WebAPI.Controllers
     public class CommentController : ControllerBase
     {
         private readonly ICommentUseCase _commentUseCase;
+        private readonly ITaskUseCase _taskUseCase;
         private readonly IValidator<AddCommentInput> _commentInputValidator;
 
-        public CommentController(ICommentUseCase commentUseCase, IValidator<AddCommentInput> commentInputValidator)
+        public CommentController(ICommentUseCase commentUseCase, ITaskUseCase taskUseCase, IValidator<AddCommentInput> commentInputValidator)
         {
             _commentUseCase = commentUseCase;
+            _taskUseCase = taskUseCase;
             _commentInputValidator = commentInputValidator;
         }
 
@@ -26,6 +29,11 @@ namespace WebAPI.Controllers
 
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors.ToCustomValidationFailure());
+
+            var task = _taskUseCase.ListTask(input.TaskId);
+
+            if (task == null)
+                return NotFound("Task não encontrada.");
 
             var comment = new Domain.Entities.Comment(0, input.Texto, input.UsuarioId, input.TaskId);
 
