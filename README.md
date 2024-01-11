@@ -152,6 +152,8 @@ As seguintes sugestões de melhorias são cruciais para orientar os próximos pa
 
 Estas sugestões são apenas pontos de partida e podem ser ajustadas conforme a evolução do projeto. O feedback contínuo dos usuários e das partes interessadas é crucial para garantir a eficácia dessas melhorias.
 
+A API foi criada utilizando .NET 5 e segue o padrão arquitetural Clean Architecture, conforme desenho abaixo de exemplo:
+![image](https://github.com/MarcosApp/GerenciadorTarefas/assets/35972748/2c71e115-60c7-466b-9e0a-a58dbfd3383c)
 
 <!-- Markdown link & img dfn's -->
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
