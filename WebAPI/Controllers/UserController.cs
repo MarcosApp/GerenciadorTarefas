@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
             _addUserInputValidator = addUserInputValidator;
         }
 
-        [HttpGet("api/User")]
+        [HttpGet]
         public IActionResult ListUser()
         {
             var users = _userUseCase.ListUser();
@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
             return Ok(users);
         }
 
-        [HttpPost("api/User")]
+        [HttpPost]
         public IActionResult AddUser(AddUserInput input)
         {
             var validationResult = _addUserInputValidator.Validate(input);

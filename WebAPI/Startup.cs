@@ -1,10 +1,13 @@
 using Application.UseCases.AddProject;
+using Application.UseCases.AddReport;
 using Application.UseCases.AddTask;
 using Application.UseCases.AddUser;
 using Domain.Contracts.Repositories.AddProject;
+using Domain.Contracts.Repositories.AddReport;
 using Domain.Contracts.Repositories.AddTask;
 using Domain.Contracts.Repositories.AddUser;
 using Domain.Contracts.UseCases.AddProject;
+using Domain.Contracts.UseCases.AddReport;
 using Domain.Contracts.UseCases.AddTask;
 using Domain.Contracts.UseCases.AddUser;
 using FluentValidation;
@@ -12,6 +15,7 @@ using Infra.Repository.DbContext;
 using Infra.Repository.Repository.AddProject;
 using Infra.Repository.Repository.AddTask;
 using Infra.Repository.Repository.AddUser;
+using Infra.Repository.Repository.Reports;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -40,10 +44,12 @@ namespace WebAPI
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IReportRepository, ReportRepository>();
 
             services.AddScoped<IProjectUseCase, ProjectUseCase>();
             services.AddScoped<ITaskUseCase, TaskUseCase>();
             services.AddScoped<IUserUseCase, UserUseCase>();
+            services.AddScoped<IReportUseCase, ReportUseCase>();
 
             services.AddTransient<IValidator<AddProjectInput>, AddProjectInputValidator>();
             services.AddTransient<IValidator<AddTaskInput>, AddTaskInputValidator>();
