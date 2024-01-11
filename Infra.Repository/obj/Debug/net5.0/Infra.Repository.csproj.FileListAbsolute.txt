@@ -1,0 +1,15 @@
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\bin\Debug\net5.0\Infra.Repository.deps.json
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\bin\Debug\net5.0\Infra.Repository.dll
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\bin\Debug\net5.0\ref\Infra.Repository.dll
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\bin\Debug\net5.0\Infra.Repository.pdb
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\bin\Debug\net5.0\Domain.dll
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\bin\Debug\net5.0\Domain.pdb
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\Infra.Repository.csproj.AssemblyReference.cache
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\Infra.Repository.GeneratedMSBuildEditorConfig.editorconfig
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\Infra.Repository.AssemblyInfoInputs.cache
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\Infra.Repository.AssemblyInfo.cs
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\Infra.Repository.csproj.CoreCompileInputs.cache
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\Infra.Repository.csproj.CopyComplete
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\Infra.Repository.dll
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\ref\Infra.Repository.dll
+E:\ProjetosNETCore\GerenciadorTarefas\Infra.Repository\obj\Debug\net5.0\Infra.Repository.pdb
