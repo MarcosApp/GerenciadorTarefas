@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Domain.Contracts.Repositories.AddTask
@@ -8,5 +9,6 @@ namespace Domain.Contracts.Repositories.AddTask
         int AddTask(Task task);
         List<Task> ListTask();
         int UpdateTask(Task task);
+        int DeleteTask(int input);
     }
 }

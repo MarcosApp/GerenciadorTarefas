@@ -18,6 +18,11 @@ namespace Application.UseCases.AddTask
             return _taskRepository.AddTask(task);
         }
 
+        public int DeleteTask(int input)
+        {
+            return _taskRepository.DeleteTask(input);
+        }
+
         public List<Task> ListTask()
         {
             return _taskRepository.ListTask();

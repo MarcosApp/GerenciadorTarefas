@@ -7,5 +7,6 @@ namespace Domain.Contracts.UseCases.AddProject
     {
         int AddProject(Project project);
         List<Project> ListProject();
+        int CountProject(int projectId);
     }
 }

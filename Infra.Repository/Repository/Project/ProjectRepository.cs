@@ -31,6 +31,18 @@ namespace Infra.Repository.Repository.AddProject
             return insertedId;
         }
 
+        public int CountProject(int projectId)
+        {
+            var query = @"select count(projetoid) from task where projetoid = @projetoid";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("projetoid", projectId, System.Data.DbType.Int32);
+
+            using var connection = _dbContext.CreateConnection();
+            int countId = connection.QuerySingle<int>(query, parameters);
+            return countId;
+        }
+
         public List<Project> ListProject()
         {
             var query = @"SELECT id, nome, descricao, datainicio, datafim  

@@ -17,6 +17,11 @@ namespace Application.UseCases.AddProject
             return _projectRepository.AddProject(project);
         }
 
+        public int CountProject(int projectId)
+        {
+            return _projectRepository.CountProject(projectId);
+        }
+
         public List<Project> ListProject()
         {
             return _projectRepository.ListProject();

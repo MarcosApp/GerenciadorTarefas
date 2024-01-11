@@ -35,6 +35,18 @@ namespace Infra.Repository.Repository.AddTask
             return insertedId;
         }
 
+        public int DeleteTask(int id)
+        {
+            var query = @"DELETE FROM task where id = @id";
+            
+            var parameters = new DynamicParameters();
+            parameters.Add("id", id, System.Data.DbType.Int32);
+
+            using var connection = _dbContext.CreateConnection();
+            int updatedId = connection.QuerySingle<int>(query, parameters);
+            return updatedId;
+        }
+
         public List<Task> ListTask()
         {
             var query = @"SELECT id, nome, descricao, status, 

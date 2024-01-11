@@ -41,6 +41,7 @@ namespace WebAPI
             services.AddTransient<IValidator<AddProjectInput>, AddProjectInputValidator>();
             services.AddTransient<IValidator<AddTaskInput>, AddTaskInputValidator>();
             services.AddTransient<IValidator<UpdateTaskInput>, UpdateTaskInputValidator>();
+            services.AddTransient<IValidator<DeleteTaskInput>, DeleteTaskInputValidator>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
