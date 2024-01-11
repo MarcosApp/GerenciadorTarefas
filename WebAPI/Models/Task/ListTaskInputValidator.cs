@@ -3,9 +3,9 @@ using System;
 
 namespace WebAPI.Models.Task
 {
-    public class DeleteTaskInputValidator : AbstractValidator<int>
+    public class ListTaskInputValidator : AbstractValidator<int>
     {
-        public DeleteTaskInputValidator()
+        public ListTaskInputValidator()
         {
             RuleFor(id => id).NotEmpty().WithMessage("Campo obrigatório")
             .GreaterThan(0)

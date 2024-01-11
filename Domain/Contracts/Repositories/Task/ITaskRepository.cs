@@ -10,5 +10,6 @@ namespace Domain.Contracts.Repositories.AddTask
         List<Task> ListTask();
         int UpdateTask(Task task);
         int DeleteTask(int input);
+        Task ListTask(int id);
     }
 }

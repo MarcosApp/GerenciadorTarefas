@@ -43,8 +43,9 @@ namespace Infra.Repository.Repository.AddTask
             parameters.Add("id", id, System.Data.DbType.Int32);
 
             using var connection = _dbContext.CreateConnection();
-            int updatedId = connection.QuerySingle<int>(query, parameters);
-            return updatedId;
+            int affectedRows = connection.Execute(query, parameters);
+
+            return affectedRows;
         }
 
         public List<Task> ListTask()
@@ -56,6 +57,22 @@ namespace Infra.Repository.Repository.AddTask
                         ";
             using var connection = _dbContext.CreateConnection();
             var task = connection.Query<Task>(query).ToList();
+            return task;
+        }
+
+        public Task ListTask(int id)
+        {
+            var query = @"SELECT id, nome, descricao, status, 
+                                 status, prioridade, datacriacao, 
+                                 dataatualizacao, projetoid 
+                          FROM task where id = @id
+                        ";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("id", id, System.Data.DbType.Int32);
+
+            using var connection = _dbContext.CreateConnection();
+            var task = connection.QueryFirstOrDefault<Task>(query, new { id });
             return task;
         }
 

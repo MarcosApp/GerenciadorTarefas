@@ -7,6 +7,7 @@ namespace Domain.Contracts.UseCases.AddTask
     {
         int AddTask(Task task);
         List<Task> ListTask();
+        Task ListTask(int id);
         int UpdateTask(Task task);
         int DeleteTask(int input);
     }

@@ -28,6 +28,11 @@ namespace Application.UseCases.AddTask
             return _taskRepository.ListTask();
         }
 
+        public Task ListTask(int id)
+        {
+            return _taskRepository.ListTask(id);
+        }
+
         public int UpdateTask(Task task)
         {
             return _taskRepository.UpdateTask(task);

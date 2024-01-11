@@ -23,7 +23,8 @@ namespace WebAPI.Controllers
         {
             var projects = _projectUseCase.ListProject();
 
-            if (projects.Count == 0) return Ok("Nenhum projeto criado.");
+            if (projects.Count == 0) 
+                return Ok("Nenhum projeto criado.");
 
             return Ok(projects);
         }

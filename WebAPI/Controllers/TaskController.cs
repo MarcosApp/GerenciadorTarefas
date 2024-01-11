@@ -1,4 +1,5 @@
-﻿using Domain.Contracts.UseCases.AddProject;
+﻿using Domain.Contracts.Enumerator.Task;
+using Domain.Contracts.UseCases.AddProject;
 using Domain.Contracts.UseCases.AddTask;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,6 @@ using WebAPI.Models.Task;
 namespace WebAPI.Controllers
 {
 
-    [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase
     {
@@ -16,28 +16,42 @@ namespace WebAPI.Controllers
         private readonly ITaskUseCase _taskUseCase;
         private readonly IValidator<AddTaskInput> _taskInputValidator;
         private readonly IValidator<UpdateTaskInput> _updateTaskInputValidator;
-        private readonly IValidator<DeleteTaskInput> _deleteTaskInputValidator;
-        public TaskController(ITaskUseCase taskUseCase, IProjectUseCase projectUseCase, IValidator<AddTaskInput> taskInputValidator, IValidator<UpdateTaskInput> updateTaskInputValidator, IValidator<DeleteTaskInput> deleteTaskInputValidator)
+        public TaskController(ITaskUseCase taskUseCase, IProjectUseCase projectUseCase, IValidator<AddTaskInput> taskInputValidator, IValidator<UpdateTaskInput> updateTaskInputValidator)
         {
             _taskUseCase = taskUseCase;
             _projectUseCase = projectUseCase;
             _taskInputValidator = taskInputValidator;
             _updateTaskInputValidator = updateTaskInputValidator;
-            _deleteTaskInputValidator = deleteTaskInputValidator;
         }
 
-        [HttpGet]
+        [HttpGet("api/Task")]
         public IActionResult ListTask()
         {
             var projects = _taskUseCase.ListTask();
 
-            if (projects.Count == 0) return Ok("Nenhuma task criado.");
+            if (projects.Count == 0) 
+                return Ok("Nenhuma task criado.");
 
             return Ok(projects);
         }
 
+        [HttpGet("api/Task/{id}")]
+        public IActionResult ListTaskId(int id)
+        {
+            var validationResult = new ListTaskInputValidator().Validate(id);
 
-        [HttpPost]
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors.ToCustomValidationFailure());
+
+            var task = _taskUseCase.ListTask(id);
+
+            if (task == null) 
+                return NotFound("Task não encontrada.");
+
+            return Ok(task);
+        }
+
+        [HttpPost("api/AddTask")]
         public IActionResult AddTask(AddTaskInput input)
         {
             var validationResult = _taskInputValidator.Validate(input);
@@ -47,7 +61,8 @@ namespace WebAPI.Controllers
 
             var countProjectTask = _projectUseCase.CountProject(input.ProjectId);
 
-            if (countProjectTask > 20) return BadRequest("Esse projeto não é mais permitido adicionar tarefas máximo 20");
+            if (countProjectTask > 20) 
+                return BadRequest("Esse projeto não é mais permitido adicionar tarefas máximo 20");
 
             var task = new Domain.Entities.Task(0, input.Nome, input.Descricao, input.Status, input.Prioridade, 
                                                     input.DataCriacao, input.DataAtualizacao, input.ProjectId
@@ -60,7 +75,7 @@ namespace WebAPI.Controllers
             return Created("", task);
         }
 
-        [HttpPut]
+        [HttpPut("api/UpdateTask")]
         public IActionResult UpdateTask(UpdateTaskInput input)
         {
             var validationResult = _updateTaskInputValidator.Validate(input);
@@ -72,26 +87,36 @@ namespace WebAPI.Controllers
 
             var valueId = _taskUseCase.UpdateTask(task);
 
-            if (valueId == 0) return BadRequest("Código de Tarefa Inválido");
+            if (valueId == 0) 
+                return BadRequest("Código de Tarefa Inválido");
 
             input.DataAtualizacao = task.DataAtualizacao;
 
             return Ok(input);
         }
 
-        [HttpDelete]
-        public IActionResult DeleteTask(DeleteTaskInput input)
+        [HttpDelete("api/DeleteTask/{id}")]
+        public IActionResult DeleteTask(int id)
         {
-            var validationResult = _deleteTaskInputValidator.Validate(input);
+            var validationResult = new DeleteTaskInputValidator().Validate(id);
 
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors.ToCustomValidationFailure());
 
-            var valueId = _taskUseCase.DeleteTask(input.Id);
+            var task = _taskUseCase.ListTask(id);
 
-            if (valueId == 0) return NotFound("Código de Tarefa Inválido");
+            if (task == null)
+                return NotFound("Task não encontrada.");
 
-            return Ok(input);
+            if (task.Status != TaskStatus.Done)
+                return BadRequest("Esta tarefa não pode ser excluída porque ainda não foi concluída.");
+
+            var valueId = _taskUseCase.DeleteTask(id);
+
+            if (valueId == 0) 
+                return BadRequest("Código de Tarefa Inválido");
+
+            return Ok("Tarefa exluida com sucesso.");
         }
     }
 }
