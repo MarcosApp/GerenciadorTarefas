@@ -1,6 +1,7 @@
 # Gerenciador de Tarefas
 
 Este é um projeto de Gerenciador de Tarefas incrível. A seguir estão as instruções para configurar e executar o projeto usando Docker.
+![image](https://github.com/MarcosApp/GerenciadorTarefas/assets/35972748/356ef24a-dfa7-43b1-aa18-020229fab49c)
 
 ## Pré-requisitos
 
