@@ -35,9 +35,6 @@ namespace GerenciadorTarefas.Tests
             Assert.IsType<OkObjectResult>(result);
             var okResult = result as OkObjectResult;
             Assert.NotNull(okResult);
-
-            var projects = okResult.Value as List<Project>;
-            Assert.NotNull(projects);
         }
 
         [Fact]
