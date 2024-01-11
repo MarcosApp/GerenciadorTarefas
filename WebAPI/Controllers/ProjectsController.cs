@@ -18,6 +18,16 @@ namespace WebAPI.Controllers
             _projectInputValidator = projectInputValidator;
         }
 
+        [HttpGet]
+        public IActionResult ListProject()
+        {
+            var projects = _projectUseCase.ListProject();
+
+            if (projects.Count == 0) return Ok("Nenhum projeto criado.");
+
+            return Ok(projects);
+        }
+
         [HttpPost]
         public IActionResult AddProject(AddProjectInput input)
         {
@@ -33,16 +43,6 @@ namespace WebAPI.Controllers
             project.Id = valueId;
 
             return Created("", project);
-        }
-
-        [HttpGet]
-        public IActionResult ListProject()
-        {
-            var projects = _projectUseCase.ListProject();
-
-            if (projects.Count == 0) return Ok("Nenhum projeto criado.");
-
-            return Ok(projects);
         }
     }
 }

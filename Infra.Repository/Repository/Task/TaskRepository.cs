@@ -43,8 +43,8 @@ namespace Infra.Repository.Repository.AddTask
                           FROM task
                         ";
             using var connection = _dbContext.CreateConnection();
-            var projects = connection.Query<Task>(query).ToList();
-            return projects;
+            var task = connection.Query<Task>(query).ToList();
+            return task;
         }
 
         public int UpdateTask(Task task)

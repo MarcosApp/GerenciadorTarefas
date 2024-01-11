@@ -18,7 +18,7 @@ namespace Application.UseCases.AddTask
             return _taskRepository.AddTask(task);
         }
 
-        public List<Domain.Entities.Task> ListTask()
+        public List<Task> ListTask()
         {
             return _taskRepository.ListTask();
         }

@@ -22,6 +22,17 @@ namespace WebAPI.Controllers
             _updateTaskInputValidator = updateTaskInputValidator;
         }
 
+        [HttpGet]
+        public IActionResult ListTask()
+        {
+            var projects = _taskUseCase.ListTask();
+
+            if (projects.Count == 0) return Ok("Nenhuma task criado.");
+
+            return Ok(projects);
+        }
+
+
         [HttpPost]
         public IActionResult AddTask(AddTaskInput input)
         {
