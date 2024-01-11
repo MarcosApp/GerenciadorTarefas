@@ -11,5 +11,6 @@ namespace Domain.Contracts.Repositories.AddUser
     {
         int AddUser(User user);
         List<User> ListUser();
+        User ListUser(int id);
     }
 }

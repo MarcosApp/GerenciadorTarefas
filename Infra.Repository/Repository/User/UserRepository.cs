@@ -41,5 +41,18 @@ namespace Infra.Repository.Repository.AddUser
             var user = connection.Query<User>(query).ToList();
             return user;
         }
+
+        public User ListUser(int id)
+        {
+            var query = @"SELECT id, nome, email, perfil
+                          FROM usuario where id = @id
+                        ";
+            var parameters = new DynamicParameters();
+            parameters.Add("id", id, System.Data.DbType.Int32);
+
+            using var connection = _dbContext.CreateConnection();
+            var user = connection.QueryFirstOrDefault<User>(query, new { id });
+            return user;
+        }
     }
 }

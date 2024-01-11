@@ -1,4 +1,5 @@
 ﻿using Domain.Contracts.UseCases.AddTask;
+using Domain.Contracts.UseCases.AddUser;
 using Domain.Contracts.UseCases.Comentario;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace WebAPI.Controllers
     {
         private readonly ICommentUseCase _commentUseCase;
         private readonly ITaskUseCase _taskUseCase;
+        private readonly IUserUseCase _userUseCase;
         private readonly IValidator<AddCommentInput> _commentInputValidator;
 
-        public CommentController(ICommentUseCase commentUseCase, ITaskUseCase taskUseCase, IValidator<AddCommentInput> commentInputValidator)
+        public CommentController(IUserUseCase userUseCase, ICommentUseCase commentUseCase, ITaskUseCase taskUseCase, IValidator<AddCommentInput> commentInputValidator)
         {
             _commentUseCase = commentUseCase;
+            _userUseCase = userUseCase;
             _taskUseCase = taskUseCase;
             _commentInputValidator = commentInputValidator;
         }
@@ -29,6 +32,10 @@ namespace WebAPI.Controllers
 
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors.ToCustomValidationFailure());
+
+            var user = _userUseCase.ListUser(input.UsuarioId);
+            if (user == null)
+                return NotFound("Usuário não encontrada.");
 
             var task = _taskUseCase.ListTask(input.TaskId);
 

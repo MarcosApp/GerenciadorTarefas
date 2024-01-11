@@ -23,5 +23,10 @@ namespace Application.UseCases.AddUser
         {
             return _userRepository.ListUser();
         }
+
+        public User ListUser(int id)
+        {
+            return _userRepository.ListUser(id);
+        }
     }
 }

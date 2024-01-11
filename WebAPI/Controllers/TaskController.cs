@@ -1,6 +1,7 @@
 ﻿using Domain.Contracts.Enumerator.Task;
 using Domain.Contracts.UseCases.AddProject;
 using Domain.Contracts.UseCases.AddTask;
+using Domain.Contracts.UseCases.AddUser;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models.Error;
@@ -12,14 +13,16 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TaskController : ControllerBase
     {
+        private readonly IUserUseCase _userUseCase;
         private readonly IProjectUseCase _projectUseCase;
         private readonly ITaskUseCase _taskUseCase;
         private readonly IValidator<AddTaskInput> _taskInputValidator;
         private readonly IValidator<UpdateTaskInput> _updateTaskInputValidator;
-        public TaskController(ITaskUseCase taskUseCase, IProjectUseCase projectUseCase, IValidator<AddTaskInput> taskInputValidator, IValidator<UpdateTaskInput> updateTaskInputValidator)
+        public TaskController(ITaskUseCase taskUseCase, IProjectUseCase projectUseCase, IUserUseCase userUseCase, IValidator<AddTaskInput> taskInputValidator, IValidator<UpdateTaskInput> updateTaskInputValidator)
         {
             _taskUseCase = taskUseCase;
             _projectUseCase = projectUseCase;
+            _userUseCase = userUseCase;
             _taskInputValidator = taskInputValidator;
             _updateTaskInputValidator = updateTaskInputValidator;
         }
@@ -58,6 +61,10 @@ namespace WebAPI.Controllers
 
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors.ToCustomValidationFailure());
+
+            var user = _userUseCase.ListUser(input.UsuarioId);
+            if (user == null)
+                return NotFound("Usuário não encontrada.");
 
             var countProjectTask = _projectUseCase.CountProject(input.ProjectId);
 

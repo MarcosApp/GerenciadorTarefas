@@ -11,6 +11,7 @@ namespace Domain.Contracts.UseCases.AddUser
     {
         int AddUser(User user);
         List<User> ListUser();
+        User ListUser(int id);
 
     }
 }
