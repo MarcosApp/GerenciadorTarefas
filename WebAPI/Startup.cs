@@ -1,13 +1,17 @@
 using Application.UseCases.AddProject;
 using Application.UseCases.AddTask;
+using Application.UseCases.AddUser;
 using Domain.Contracts.Repositories.AddProject;
 using Domain.Contracts.Repositories.AddTask;
+using Domain.Contracts.Repositories.AddUser;
 using Domain.Contracts.UseCases.AddProject;
 using Domain.Contracts.UseCases.AddTask;
+using Domain.Contracts.UseCases.AddUser;
 using FluentValidation;
 using Infra.Repository.DbContext;
 using Infra.Repository.Repository.AddProject;
 using Infra.Repository.Repository.AddTask;
+using Infra.Repository.Repository.AddUser;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WebAPI.Models.Project;
 using WebAPI.Models.Task;
+using WebAPI.Models.User;
 
 namespace WebAPI
 {
@@ -34,13 +39,16 @@ namespace WebAPI
             services.AddSingleton<IDbContext, DbContext>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IProjectUseCase, ProjectUseCase>();
             services.AddScoped<ITaskUseCase, TaskUseCase>();
+            services.AddScoped<IUserUseCase, UserUseCase>();
 
             services.AddTransient<IValidator<AddProjectInput>, AddProjectInputValidator>();
             services.AddTransient<IValidator<AddTaskInput>, AddTaskInputValidator>();
             services.AddTransient<IValidator<UpdateTaskInput>, UpdateTaskInputValidator>();
+            services.AddTransient<IValidator<AddUserInput>, AddUserInputValidator>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

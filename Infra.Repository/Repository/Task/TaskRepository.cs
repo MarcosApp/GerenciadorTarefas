@@ -16,19 +16,20 @@ namespace Infra.Repository.Repository.AddTask
             _dbContext = dbContext;
         }
 
-        public int AddTask(Task project)
+        public int AddTask(Task task)
         {
-            var query = @"INSERT INTO task (nome, descricao, status, prioridade, datacriacao, projetoid) 
-                          VALUES (@nome, @descricao, @status, @prioridade, @datacriacao, @projetoid)
+            var query = @"INSERT INTO task (nome, descricao, status, prioridade, datacriacao, projetoid, usuarioid) 
+                          VALUES (@nome, @descricao, @status, @prioridade, @datacriacao, @projetoid, @usuarioid)
                         SELECT CAST(SCOPE_IDENTITY() as int)";
 
             var parameters = new DynamicParameters();
-            parameters.Add("nome", project.Nome, System.Data.DbType.String);
-            parameters.Add("descricao", project.Descricao, System.Data.DbType.String);
-            parameters.Add("status", (int)project.Status, System.Data.DbType.Int32);
-            parameters.Add("prioridade", (int)project.Prioridade, System.Data.DbType.Int32);
+            parameters.Add("nome", task.Nome, System.Data.DbType.String);
+            parameters.Add("descricao", task.Descricao, System.Data.DbType.String);
+            parameters.Add("status", (int)task.Status, System.Data.DbType.Int32);
+            parameters.Add("prioridade", (int)task.Prioridade, System.Data.DbType.Int32);
             parameters.Add("datacriacao", DateTime.Now, System.Data.DbType.DateTime);
-            parameters.Add("projetoid", project.ProjetoId, System.Data.DbType.Int32);
+            parameters.Add("usuarioid", task.UsuarioId, System.Data.DbType.Int32);
+            parameters.Add("projetoid", task.ProjetoId, System.Data.DbType.Int32);
 
             using var connection = _dbContext.CreateConnection();
             int insertedId = connection.QuerySingle<int>(query, parameters);

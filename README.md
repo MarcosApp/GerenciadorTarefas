@@ -3,6 +3,7 @@
 CREATE DATABASE gerenciador_task;
 go
 use gerenciador_task;
+
 GO
 drop table if exists project;
 CREATE TABLE project(
@@ -12,9 +13,19 @@ CREATE TABLE project(
     datainicio DATETIME not null,
     datafim DATETIME not null
 )
-GO
 
-drop table if exists task;
+GO
+DROP TABLE IF EXISTS usuario;
+CREATE TABLE usuario (
+    id INT PRIMARY KEY IDENTITY,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(1000) NOT NULL, 
+    perfil int not null
+);
+
+GO
+DROP TABLE IF EXISTS task;
 CREATE TABLE task (
     id INT PRIMARY KEY IDENTITY,
     nome VARCHAR(100) NOT NULL,
@@ -24,5 +35,7 @@ CREATE TABLE task (
     datacriacao DATETIME DEFAULT GETDATE() NOT NULL,
     dataatualizacao DATETIME NULL,
     projetoid INT,
-    FOREIGN KEY (projetoid) REFERENCES project(id)
+    usuarioid INT, 
+    FOREIGN KEY (projetoid) REFERENCES project(id),
+    FOREIGN KEY (usuarioid) REFERENCES usuario(id) -- Corrige a referência para usuarioid
 );

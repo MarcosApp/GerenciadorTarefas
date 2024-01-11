@@ -12,5 +12,6 @@ namespace WebAPI.Models.Task
         public DateTime DataCriacao { get; set; }
         public DateTime DataAtualizacao { get; set; }
         public virtual int ProjectId { get; set; }
+        public virtual int UsuarioId { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Domain.Entities
             DataAtualizacao = dataAtualizacao;
         }
 
-        public Task(int id, string nome, string descricao, TaskStatus status, TaskPriority priority, DateTime dataCriacao, DateTime dataAtualizacao, int projetoId)
+        public Task(int id, string nome, string descricao, TaskStatus status, TaskPriority priority, DateTime dataCriacao, DateTime dataAtualizacao, int projetoId, int usuarioId)
         {
             Id = id;
             Nome = nome;
@@ -30,6 +30,7 @@ namespace Domain.Entities
             DataCriacao = dataCriacao;
             DataAtualizacao = dataAtualizacao;
             ProjetoId = projetoId;
+            UsuarioId = usuarioId;
         }
 
         public int Id { get; set; }
@@ -45,5 +46,6 @@ namespace Domain.Entities
         public DateTime DataAtualizacao { get; private set; }
 
         public virtual int ProjetoId { get; private set; }
+        public virtual int UsuarioId { get; private set; }
     }
 }

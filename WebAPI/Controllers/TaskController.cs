@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
                 return BadRequest("Esse projeto não é mais permitido adicionar tarefas máximo 20");
 
             var task = new Domain.Entities.Task(0, input.Nome, input.Descricao, input.Status, input.Prioridade, 
-                                                    input.DataCriacao, input.DataAtualizacao, input.ProjectId
+                                                    input.DataCriacao, input.DataAtualizacao, input.ProjectId, input.UsuarioId
                                                 );
 
             var valueId = _taskUseCase.AddTask(task);

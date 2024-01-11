@@ -19,6 +19,10 @@ namespace WebAPI.Models.Task
             RuleFor(x => x.ProjectId).NotEmpty().WithMessage("Campo obrigatório");
 
             RuleFor(x => x.Status).NotEmpty().WithMessage("Campo obrigatório");
+
+            RuleFor(x => x.UsuarioId).NotEmpty().WithMessage("Campo obrigatório")
+            .GreaterThan(0)
+            .WithMessage("O ID deve ser maior que 0.");
         }
     }
 }
