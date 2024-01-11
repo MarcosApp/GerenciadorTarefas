@@ -67,7 +67,7 @@ namespace WebAPI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gerenciado de Tarefas", Version = "v1", Contact = new OpenApiContact() { Email = "marcosdossantos43@hotmail.com", Name = "Marcos Gotado" } });
             });
         }
 

@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
             var users = _userUseCase.ListUser();
 
             if (users.Count == 0)
-                return Ok("Nenhuma usuário encontrado.");
+                return NotFound("Nenhuma usuário encontrado.");
 
             return Ok(users);
         }
