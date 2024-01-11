@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
             return Ok(task);
         }
 
-        [HttpPost("api/AddTask")]
+        [HttpPost("api/Task")]
         public IActionResult AddTask(AddTaskInput input)
         {
             var validationResult = _taskInputValidator.Validate(input);
@@ -75,7 +75,7 @@ namespace WebAPI.Controllers
             return Created("", task);
         }
 
-        [HttpPut("api/UpdateTask")]
+        [HttpPut("api/Update")]
         public IActionResult UpdateTask(UpdateTaskInput input)
         {
             var validationResult = _updateTaskInputValidator.Validate(input);
@@ -95,7 +95,7 @@ namespace WebAPI.Controllers
             return Ok(input);
         }
 
-        [HttpDelete("api/DeleteTask/{id}")]
+        [HttpDelete("api/Delete/{id}")]
         public IActionResult DeleteTask(int id)
         {
             var validationResult = new DeleteTaskInputValidator().Validate(id);
