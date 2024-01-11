@@ -43,3 +43,4 @@ E:\ProjetosNETCore\GerenciadorTarefas\WebAPI\bin\Debug\net5.0\Application.dll
 E:\ProjetosNETCore\GerenciadorTarefas\WebAPI\bin\Debug\net5.0\Infra.Repository.dll
 E:\ProjetosNETCore\GerenciadorTarefas\WebAPI\bin\Debug\net5.0\Application.pdb
 E:\ProjetosNETCore\GerenciadorTarefas\WebAPI\bin\Debug\net5.0\Infra.Repository.pdb
+E:\ProjetosNETCore\GerenciadorTarefas\WebAPI\bin\Debug\net5.0\Newtonsoft.Json.dll

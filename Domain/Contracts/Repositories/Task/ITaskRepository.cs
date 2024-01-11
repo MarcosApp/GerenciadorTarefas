@@ -7,5 +7,6 @@ namespace Domain.Contracts.Repositories.AddTask
     {
         int AddTask(Task task);
         List<Task> ListTask();
+        int UpdateTask(Task task);
     }
 }

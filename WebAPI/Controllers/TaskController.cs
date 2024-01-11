@@ -14,10 +14,12 @@ namespace WebAPI.Controllers
 
         private readonly ITaskUseCase _taskUseCase;
         private readonly IValidator<AddTaskInput> _taskInputValidator;
-        public TaskController(ITaskUseCase taskUseCase, IValidator<AddTaskInput> taskInputValidator)
+        private readonly IValidator<UpdateTaskInput> _updateTaskInputValidator;
+        public TaskController(ITaskUseCase taskUseCase, IValidator<AddTaskInput> taskInputValidator, IValidator<UpdateTaskInput> updateTaskInputValidator)
         {
             _taskUseCase = taskUseCase;
             _taskInputValidator = taskInputValidator;
+            _updateTaskInputValidator = updateTaskInputValidator;
         }
 
         [HttpPost]
@@ -37,6 +39,25 @@ namespace WebAPI.Controllers
             task.Id = valueId;
 
             return Created("", task);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateTask(UpdateTaskInput input)
+        {
+            var validationResult = _updateTaskInputValidator.Validate(input);
+
+            if (!validationResult.IsValid)
+                return BadRequest(validationResult.Errors.ToCustomValidationFailure());
+
+            var task = new Domain.Entities.Task(input.Id, input.Nome, input.Descricao, input.Status, System.DateTime.Now);
+
+            var valueId = _taskUseCase.UpdateTask(task);
+
+            if (valueId == 0) return BadRequest("Código de Tarefa Inválido");
+
+            input.DataAtualizacao = task.DataAtualizacao;
+
+            return Ok(input);
         }
     }
 }

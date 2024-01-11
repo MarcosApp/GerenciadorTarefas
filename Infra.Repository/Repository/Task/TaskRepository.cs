@@ -42,10 +42,30 @@ namespace Infra.Repository.Repository.AddTask
                                  dataatualizacao, projetoid 
                           FROM task
                         ";
-
             using var connection = _dbContext.CreateConnection();
             var projects = connection.Query<Task>(query).ToList();
             return projects;
+        }
+
+        public int UpdateTask(Task task)
+        {
+            var query = @"UPDATE task 
+                  SET nome = @nome, 
+                      descricao = @descricao, 
+                      status = @status,
+                      dataatualizacao = @dataatualizacao
+                  WHERE id = @Id";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", task.Id, System.Data.DbType.Int32);
+            parameters.Add("nome", task.Nome, System.Data.DbType.String);
+            parameters.Add("descricao", task.Descricao, System.Data.DbType.String);
+            parameters.Add("status", task.Status, System.Data.DbType.Int32);
+            parameters.Add("dataatualizacao", task.DataAtualizacao, System.Data.DbType.DateTime);
+
+            using var connection = _dbContext.CreateConnection();
+            var execucao = connection.Execute(query, parameters);
+            return execucao;
         }
     }
 }

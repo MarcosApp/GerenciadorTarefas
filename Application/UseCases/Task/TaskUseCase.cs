@@ -22,5 +22,10 @@ namespace Application.UseCases.AddTask
         {
             return _taskRepository.ListTask();
         }
+
+        public int UpdateTask(Task task)
+        {
+            return _taskRepository.UpdateTask(task);
+        }
     }
 }
