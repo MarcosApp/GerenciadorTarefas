@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
 
             var report = _reportUseCase.ListReport(data30DiasAtras);
 
-            if (report.Count == 0)
+            if (report != null && report.Count == 0)
                 return Ok("Nenhuma tarefa encontrado.");
 
             return Ok(report);

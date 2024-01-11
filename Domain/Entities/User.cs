@@ -25,6 +25,6 @@ namespace Domain.Entities
         public string Nome { get; private set; }
         public string Email { get; private set; }
         public string Senha { get; private set; }
-        public UserPerfil Perfil { get; private set; }
+        public UserPerfil Perfil { get; set; }
     }
 }
